@@ -1,7 +1,7 @@
 <template>
     <div>
         <form class="todo-form">
-            <input  placeholder="Введите заголовок" v-model="title" type="text">
+             <UiInput v-model:input-model="title"/>
             <textarea  placeholder="Введите описание" v-model="description" type="text" rows="10" cols="4"></textarea>
             <p class="error-message">
                 {{ errorMessage }}</p>
@@ -14,6 +14,7 @@
 
 <script setup>
 import UiButton from './ui/ui-button.vue';
+import UiInput from './ui/ui-input.vue';
 
 const title = defineModel('title')
 const description = defineModel('description')
