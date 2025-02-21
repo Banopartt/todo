@@ -5,6 +5,12 @@
             <textarea  placeholder="Введите описание" v-model="description" type="text" rows="10" cols="4"></textarea>
             <p class="error-message">
                 {{ errorMessage }}</p>
+
+            <div>
+                <label for="colorPicker">Выберите цвет фона задачи:</label>
+                <chrome-picker v-model="selectedColor" />
+            </div>
+
             <UiButton @click.prevent="emit('createTodo')">
                 Создать
             </UiButton>
@@ -18,6 +24,7 @@ import UiInput from './ui/ui-input.vue';
 
 const title = defineModel('title')
 const description = defineModel('description')
+const selectedColor = ref({ hex: '#ffffff' });
 
 const emit = defineEmits(['createTodo'])
 const {errorMessage} = defineProps(['errorMessage'])
@@ -41,4 +48,7 @@ input, textarea {
     padding: 10px 15px;
     margin: 10px 0;
 }
+
+.chrome-picker {
+    margin-top: 10px}
 </style>
