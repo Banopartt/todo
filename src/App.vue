@@ -1,17 +1,22 @@
 <template>
   <div>
-    <TodoForm :error-message="errorMessage" v-model:title="title" v-model:description="description" @create-todo="CreateTodo" />
-    <div class="wrapper">
-      <TodoCard v-for="(todo, id) in todoCards" :title="todo.title" :description="todo.description" :key="id" />
+    <TodoForm :error-message="errorMessage" v-model:title="title" v-model:description="description"
+      @create-todo="CreateTodo" />
+    <div class="wrapper" v-if="todoCards.length">
+      <TodoCard v-for="(todo, id) in todoCards" :todo="todo" :key="id" @removeTodo="removeTodo" />
     </div>
+    <p v-else>
+      No todos found. Please add a new one.
+    </p>
+
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
 import TodoCard from './components/todo-card.vue';
 import TodoForm from './components/todo-form.vue';
 import { todoCards } from './const/mock-data';
+import { ref } from 'vue';
 
 const title = ref("")
 const description = ref("")
@@ -30,11 +35,17 @@ const CreateTodo = () => {
     id: Date.now(),
   }
 
-  todoCards.push(newTodo)
+  todoCards.value.push(newTodo)
   title.value = ""
   description.value = ""
   errorMessage.value = ""
 }
+
+const removeTodo = (id) => {
+  todoCards.value = todoCards.value.filter((todo) => todo.id !== id)
+}
+
+
 </script>
 
 <style scoped>

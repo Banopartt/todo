@@ -1,16 +1,16 @@
 <template>
     <div class="todo_card">
         <p>
-            {{ title }}
+            {{ todo?.title }}
         </p>
         <span>
-            {{ description }}
+            {{ todo?.description }}
         </span>
         <div>
             <UiButton>
                 Изменить
             </UiButton>
-            <UiButton>
+            <UiButton @click.prevent="emits('removeTodo', todo?.id)">
                 Удалить
             </UiButton>
         </div>
@@ -20,8 +20,9 @@
 <script setup>
 import UiButton from './ui/ui-button.vue';
 
-const { title, description } = defineProps(['title', 'description']);
+const { todo } = defineProps(['todo']);
 
+const emits = defineEmits(['removeTodo'])
 </script>
 
 <style scoped>
