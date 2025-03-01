@@ -2,14 +2,12 @@
     <div>
         <footer>
             <div>
-                <span> 2025 My Website. All rights reserved.</span>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
+                <span> 2025 Мой Веб-сайт</span>
             </div>
             <div>
                 <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Про Нас </a></li>
+                    <li><a href="#">Наши Контакты</a></li>
                 </ul>
             </div>
         </footer>
