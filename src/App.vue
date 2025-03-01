@@ -1,7 +1,7 @@
 <template>
   <div>
+    <todoFooter/>
     <TodoNavbar/>
-    <router-view />
     <TodoEdit v-model:is-open-modal="isOpenModal" />
     <TodoForm :error-message="errorMessage" v-model:title="title" v-model:description="description"
       @create-todo="createTodo" />
@@ -31,6 +31,7 @@ import TodoForm from "@/components/todo-form.vue";
 import TodoEdit from "@/components/todo-edit.vue";
 import axios from "axios";
 import TodoNavbar from "./components/todo-navbar.vue";
+import todoFooter from "./components/todo-footer.vue";
 const todoCards = ref([])
 const title = ref("")
 const description = ref("")
