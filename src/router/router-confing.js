@@ -14,12 +14,12 @@ export const routerConfing = createRouter({
         {
             name:"Todo",
             path:"/todo",
-            component:TodoPage
+            component: ()=> import("@/pages/todo-page.vue")
         },
         {
             name: "About",
             path:"/about",
-            component: AboutPage
+            component: ()=> import("@/pages/about-page.vue")
         }
     ]
 })
