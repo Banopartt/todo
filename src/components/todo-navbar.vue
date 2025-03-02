@@ -1,50 +1,70 @@
 <template>
-    <header class="header">
+  <div>
+    <header class="navbar">
       <div class="container">
-        <h1 class="logo">logo</h1>
-        <nav>
+        <div class="logo" @click="router.push('/')">
+          Todo App
+        </div>
+        <nav class="navigation">
           <ul>
-            <li to="/">Главная</li>
-            <li to="/about">О нас</li>
-            <li to="/contact">Контакты</li>
+            <li v-for="link in links" :key="link.path">
+              <router-link :to="link.path">{{ link.name }}</router-link>
+            </li>
           </ul>
         </nav>
       </div>
     </header>
-  </template>
-  
-  <script setup>
+  </div>
+</template>
 
-  </script>
-  
-  <style scoped>
-  .header {
-    background: slategray;
-    color: white;
-    padding: 15px 0;
+<script setup>
+import { useRouter } from 'vue-router';
+
+const links = [
+  {
+    name: "Todos",
+    path: "/todo"
+  },
+  {
+    name: "About",
+    path: "/about"
   }
-  .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-  .logo {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 15px;
-  }
-  nav a {
-    color: white;
-    text-decoration: none;
-  }
-  nav a:hover {
-    text-decoration: underline;
-  }
-  </style>
+]
+
+const router = useRouter()
+</script>
+
+<style scoped>
+.navbar {
+  background: lightgray;
+  color: white
+}
+
+.logo {
+  font-family: sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.container {
+  max-width: 80%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navigation ul {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.navigation ul li a {
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+  font-family: sans-serif;
+}
+</style>
