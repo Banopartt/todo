@@ -13,7 +13,7 @@ const emits = defineEmits(['removeTodo', 'toggleEditModal'])
       {{ todo?.title }}
     </p>
     <span>
-    {{ todo?.description }}
+    {{ todo?.body }}
     </span>
     <div>
       <ui-button color="danger" @click="emits('toggleEditModal')">

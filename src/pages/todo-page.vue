@@ -1,6 +1,9 @@
 <template>
     <div>
-      <TodoEdit v-model:is-open-modal="isOpenModal" />
+      <TodoEdit v-model:selected-todo="selectedTodo"
+       @update-todo="handleUpdateTodo"
+       v-model:is-open-modal="isOpenModal" 
+       />
       <TodoForm :error-message="errorMessage" v-model:title="title" v-model:description="description"
         @create-todo="createTodo" />
       <div v-if="isLoading">
@@ -34,6 +37,9 @@
   const isLoading = ref("")
   const errorMessage = ref("")
   const errorResponse = ref("")
+  const selectedTodo = ref(null)
+
+
   
   const createTodo = () => {
     if (!title.value.length || !description.value.length) {
@@ -43,10 +49,10 @@
     todoCards.value.push({
       id: crypto.randomUUID(),
       title: title.value,
-      description: description.value,
+      body: body.value,
     })
     title.value = "";
-    description.value = "";
+    body.value = "";
     errorMessage.value = "";
   }
   
@@ -55,7 +61,8 @@
   }
   
   const isOpenModal = ref(false);
-  const toggleEditModal = () => {
+  const toggleEditModal = (todo) => {
+    selectedTodo.value = todo;
     isOpenModal.value = !isOpenModal.value;
   }
   async function getTodos() {
@@ -76,6 +83,15 @@
     console.log("Компонент монтирован")
     getTodos()
   })
+
+  const handleUpdateTodo = (updateTodo) => {
+    const idx = todoCards.value.findIndex((todo) => todoCards.id === updateTodo.id)
+    if (idx !== -1 ) {
+      todoCards.value[idx] = updateTodo
+      isOpenModal.value = false
+    }
+  }
+
   </script>
   
   <style scoped>
