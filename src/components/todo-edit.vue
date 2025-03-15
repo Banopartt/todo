@@ -9,7 +9,7 @@ const isOpenModal = defineModel('isOpenModal')
 
 const selectedTodo = defineModel('selectedTodo')
 
-const emits = defineModel(['update-todo'])
+const emits = defineEmits(['update-todo'])
 
 const saveChanges = () => {
   emits('update-todo', selectedTodo);
@@ -21,7 +21,7 @@ const saveChanges = () => {
   <div>
     <UiModal v-model:is-open="isOpenModal">
       <p class="edit-title">
-        Редактировать задачу номер № {{ selectedTodo.id }}
+        Редактировать задачу номер № {{ selectedTodo?.id }}
       </p>
       <ui-input v-model:input-model="selectedTodo.title" class="edit-input" placeholder="Введите заголовок"/>
       <ui-input v-model:input-model="selectedTodo.body" class="edit-input" placeholder="Введите описание"/>

@@ -1,6 +1,6 @@
 <template>
     <div>
-      <TodoEdit v-model:selected-todo="selectedTodo"
+      <TodoEdit v-model:selectedTodo="selectedTodo"
        @update-todo="handleUpdateTodo"
        v-model:is-open-modal="isOpenModal" 
        />
@@ -62,6 +62,7 @@
   
   const isOpenModal = ref(false);
   const toggleEditModal = (todo) => {
+    
     selectedTodo.value = todo;
     isOpenModal.value = !isOpenModal.value;
   }
@@ -85,7 +86,7 @@
   })
 
   const handleUpdateTodo = (updateTodo) => {
-    const idx = todoCards.value.findIndex((todo) => todoCards.id === updateTodo.id)
+    const idx = todoCards.value.findIndex((todo) => todo.id === updateTodo.id)
     if (idx !== -1 ) {
       todoCards.value[idx] = updateTodo
       isOpenModal.value = false

@@ -16,7 +16,7 @@ const emits = defineEmits(['removeTodo', 'toggleEditModal'])
     {{ todo?.body }}
     </span>
     <div>
-      <ui-button color="danger" @click="emits('toggleEditModal')">
+      <ui-button color="danger" @click="emits('toggleEditModal', todo)">
         Изменить
       </ui-button>
       <ui-button @click="emits('removeTodo', todo?.id)">

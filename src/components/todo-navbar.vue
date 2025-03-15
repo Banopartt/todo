@@ -1,24 +1,10 @@
-<template>
-  <div>
-    <header class="navbar">
-      <div class="container">
-        <div class="logo" @click="router.push('/')">
-          Todo App
-        </div>
-        <nav class="navigation">
-          <ul>
-            <li v-for="link in links" :key="link.path">
-              <router-link :to="link.path">{{ link.name }}</router-link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-  </div>
-</template>
-
 <script setup>
-import { useRouter } from 'vue-router';
+
+
+import { inject } from "vue";
+import {useRouter} from "vue-router";
+
+const isOpenSidebar = inject('isOpenSidebar')
 
 const links = [
   {
@@ -32,12 +18,36 @@ const links = [
 ]
 
 const router = useRouter()
+
+const toggleSidebar = ()=> {  
+  isOpenSidebar.value = !isOpenSidebar.value
+}
 </script>
+
+<template>
+  <header class="navbar">
+    <div class="container">
+      <div class="logo" @click="router.push('/')">
+        Todo App
+      </div>
+      <nav class="navigation">
+        <ul>
+          <li v-for="link in links" :key="link.path">
+            <router-link :to="link.path">{{ link.name }}</router-link>
+          </li>
+        </ul>
+      </nav>
+      <div class="burger" @click="toggleSidebar">
+        <span v-for="line in 3" :key="line"></span>
+      </div>
+    </div>
+  </header>
+</template>
 
 <style scoped>
 .navbar {
   background: lightgray;
-  color: white
+  color: white;
 }
 
 .logo {
@@ -66,5 +76,27 @@ const router = useRouter()
   font-weight: 600;
   font-size: 18px;
   font-family: sans-serif;
+}
+
+@media screen and (max-width: 768px) {
+  .navigation {
+    display: none;
+  }
+  .burger {
+    display: flex !important;
+  }
+}
+.burger {
+  width: 28px;
+  height: 28px;
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.burger span {
+  width: 100%;
+  background: white;
+  height: 2px;
 }
 </style>
