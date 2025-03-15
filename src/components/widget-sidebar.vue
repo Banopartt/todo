@@ -16,6 +16,10 @@ const isOpenSidebar = inject('isOpenSidebar')
             <div class="close-btn" @click="isOpenSidebar=(false)">
               x  
             </div>
+            <h2>Sidebar</h2>
+            <p>This is the sidebar content</p>
+            <button class="btn-about">Open About</button>
+            <button class="btn-home">Return Home</button>
         </div>
     </aside>
   </div>
@@ -59,5 +63,25 @@ const isOpenSidebar = inject('isOpenSidebar')
   top: 0;
   right: 30px;
   font-size: 48px;
+}
+.btn-about{
+  margin-top: 20px;
+  border: none;
+  outline:none;
+  box-shadow:none;
+  background:transparent;
+  color:white;
+  cursor: pointer;
+
+}
+
+.btn-home{
+  margin-top: 20px;
+  border: none;
+  outline:none;
+  box-shadow:none;
+  background: transparent;
+  color:white; 
+  cursor: pointer;
 }
 </style>
