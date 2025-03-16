@@ -2,7 +2,7 @@
 
 
 import { inject } from "vue";
-import {useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 
 const isOpenSidebar = inject('isOpenSidebar')
 
@@ -22,6 +22,8 @@ const router = useRouter()
 const toggleSidebar = ()=> {  
   isOpenSidebar.value = !isOpenSidebar.value
 }
+
+
 </script>
 
 <template>

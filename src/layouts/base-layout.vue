@@ -25,5 +25,6 @@ provide("isOpenSidebar", isOpenSidebar)
     width: 80%;
     margin: 0 auto;
     padding: 0 20px;
+    min-height: 100svh;
 }
 </style>

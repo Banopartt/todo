@@ -1,26 +1,51 @@
 <script setup>
+import { ref, watch } from 'vue';
 import { inject } from 'vue';
+import { RouterLink, useRoute } from 'vue-router';
 
 const isOpenSidebar = inject('isOpenSidebar')
 
+const sidebarLInk = ref([
+  {
+    name:"Home",
+    path: "/",
+  },
+  {
+    name:"About",
+    path: "/about",
+  },
+  {
+    name:"Todo",
+    path: "/todo",
+  }
+])
+
+const route = useRoute()
+
+watch(() => route.path, () => {
+  isOpenSidebar.value = false
+})
 
 
 </script>
 
 <template>
   <div @click="isOpenSidebar = false" class="shadow" :class="{
-      'visible': isOpenSidebar,
-    }">
+    'visible': isOpenSidebar,
+  }">
     <aside class="sidebar" @click.stop>
-        <div class="content">
-            <div class="close-btn" @click="isOpenSidebar=(false)">
-              x  
-            </div>
-            <h2>Sidebar</h2>
-            <p>This is the sidebar content</p>
-            <button class="btn-about">Open About</button>
-            <button class="btn-home">Return Home</button>
+      <div class="content">
+        <div class="close-btn" @click="isOpenSidebar = (false)">
+          x
         </div>
+        <ul class="menu">
+          <li v-for="link in sidebarLInk" :key= "'sidebar-link-id' + link.path">
+            <router-link :to="link.path">
+              {{ link.name }}
+            </router-link>  
+          </li>
+        </ul>
+      </div>
     </aside>
   </div>
 </template>
@@ -32,16 +57,23 @@ const isOpenSidebar = inject('isOpenSidebar')
   left: 0;
   top: 0;
   opacity: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
 }
+
 .visible {
   opacity: 10;
   z-index: 1;
 }
+
 .sidebar {
   position: fixed;
   right: 0;
@@ -53,6 +85,7 @@ const isOpenSidebar = inject('isOpenSidebar')
   z-index: 20 !important;
 
 }
+
 .content {
   padding: 40px;
   position: relative;
@@ -64,24 +97,6 @@ const isOpenSidebar = inject('isOpenSidebar')
   right: 30px;
   font-size: 48px;
 }
-.btn-about{
-  margin-top: 20px;
-  border: none;
-  outline:none;
-  box-shadow:none;
-  background:transparent;
-  color:white;
-  cursor: pointer;
 
-}
 
-.btn-home{
-  margin-top: 20px;
-  border: none;
-  outline:none;
-  box-shadow:none;
-  background: transparent;
-  color:white; 
-  cursor: pointer;
-}
 </style>
